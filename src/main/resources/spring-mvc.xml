@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 静态资源放行：相当于Tomcat默认控制器的功能 -->
+    <mvc:default-servlet-handler/>
+
+    <!--开启spring注解扫描-->
+    <context:component-scan base-package="com.chen.implcontrollermethod"/>
+    <context:component-scan base-package="com.chen.allannotation"/>
+    <!--开启springMVC注解扫描-->
+    <mvc:annotation-driven/>
+
+
+    <bean name="/hello" class="com.chen.controller.ControllerOne"/>
+
+    <bean name="/controllerone" class="com.chen.implcontrollermethod.ControllerOne"/>
+    <bean name="/controllertwo" class="com.chen.implcontrollermethod.ControllerTwo"/>
+
+
+</beans>
