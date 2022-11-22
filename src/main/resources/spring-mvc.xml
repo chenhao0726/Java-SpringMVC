@@ -17,11 +17,46 @@
     <mvc:default-servlet-handler/>
 
     <!--开启spring注解扫描-->
-    <context:component-scan base-package="com.chen.implcontrollermethod"/>
-    <context:component-scan base-package="com.chen.allannotation"/>
+    <context:component-scan base-package="com.chen"/>
     <!--开启springMVC注解扫描-->
-    <mvc:annotation-driven/>
+    <!--开启spring对mvc的支持-->
+    <mvc:annotation-driven>
+        <!--设置响应输出字符集-->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=utf-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--配置上传解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--上传文件的最大大小的限制  1MB-->
+        <property name="maxUploadSize" value="1048576"/>
+    </bean>
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--配置要拦截的请求  /* 说明只拦截1级请求 /** 拦截多级请求-->
+            <mvc:mapping path="/**"/>
+            <!--配置不拦截的请求-->
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/logout"/>
+            <!--配置拦截器的Bean-->
+            <bean class="com.chen.interceptor.MyInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <bean name="/hello" class="com.chen.controller.ControllerOne"/>
 

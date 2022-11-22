@@ -1,7 +1,6 @@
 package com.chen.implcontrollermethod;
 
 import org.springframework.web.HttpRequestHandler;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
